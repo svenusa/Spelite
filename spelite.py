@@ -8,7 +8,6 @@ from tkinter import messagebox
 # Izveido logu
 gameWindow = Tk()
 gameWindow.title("Attēli")
-
 count = 0  # Atvērtās rūtiņas
 correctAnswers = 0  # Pareizās atbildes
 answer = []
@@ -29,7 +28,6 @@ def btnClick (btn,number):
         count+=1 #viena rutina atklata
         answer.append(number) #pievieno pie atbildem
         answer_dict[btn]=imageList[number]
-
     if len(answer)==2: #ja atvertas divas kartites
         if imageList[answer[0]]==imageList[answer[1]]: #salidzina attelus, kas saglabats
             for key in answer_dict:
@@ -39,66 +37,64 @@ def btnClick (btn,number):
                 messagebox.showinfo('Vienādi attēli', 'Esi uzminējis')
                 correctAnswers=0
             answernumb+=1
-    else:
-        Tk.update(btn) #messagebox update, tapec vajag piespiest programmu updatetot
-        time.sleep(0.5)
-        messagebox.showinfo('Vienādi attēli', 'Neuzminēji')
-        for key in answer_dict:
-            key['image']='pyimage2'
-    count=0
-    answer=[]
-    answer_dict={}
-    if answernumb==5:
+        else:
+            Tk.update(btn) #messagebox update, tapec vajag piespiest programmu updatetot
+            time.sleep(0.5)
+            messagebox.showinfo('Vienādi attēli', 'Neuzminēji')
+            for key in answer_dict:
+                key['image']='pyimage2'
+        count=0
+        answer=[]
+        answer_dict={}
+        if answernumb==5:
 
-        messagebox.showinfo('Vienādi attēli', 'Malacis! Tu uzvarēji!')
-        MsgBox = messagebox.askquestion('Jauna spele','Vai vēlatues sākt jaunu spēli?', icon = 'question')
-#izveidoju jautājumu spēles beigās
-        if MsgBox == 'yes': #ja jā, tad reset
-            reset()
-        else: #citādi iziet
-            quit()
-    return 0
+            messagebox.showinfo('Vienādi attēli', 'Malacis! Tu uzvarēji!')
+            MsgBox = messagebox.askquestion('Jauna spele','Vai vēlatues sākt jaunu spēli?', icon = 'question')
+            #izveidoju jautājumu spēles beigās
+            if MsgBox == 'yes': #ja jā, tad reset
+                reset()
+            else: #citādi iziet
+                quit()
+        return 0
 
 def reset():
- global count
- global correctAnswers
- global answer
- global answer_dict
- global answernumb
+    global count
+    global correctAnswers
+    global answer
+    global answer_dict
+    global answernumb
 
 
 
     
- btn0.config(state=NORMAL)
- btn1.config(state=NORMAL)
- btn2.config(state=NORMAL)
- btn3.config(state=NORMAL)
- btn4.config(state=NORMAL)
- btn5.config(state=NORMAL)
- btn6.config(state=NORMAL)
- btn7.config(state=NORMAL)
- btn8.config(state=NORMAL)
- btn9.config(state=NORMAL)
+    btn0.config(state=NORMAL)
+    btn1.config(state=NORMAL)
+    btn2.config(state=NORMAL)
+    btn3.config(state=NORMAL)
+    btn4.config(state=NORMAL)
+    btn5.config(state=NORMAL)
+    btn6.config(state=NORMAL)
+    btn7.config(state=NORMAL)
+    btn8.config(state=NORMAL)
+    btn9.config(state=NORMAL)
 
- btn0['image']='pyimage2'
- btn1['image']='pyimage2'
- btn2['image']='pyimage2'
- btn3['image']='pyimage2'
- btn4['image']='pyimage2'
- btn5['image']='pyimage2'
- btn6['image']='pyimage2'
- btn7['image']='pyimage2'
- btn8['image']='pyimage2'
- btn9['image']='pyimage2'
+    btn0['image']='pyimage2'
+    btn1['image']='pyimage2'
+    btn2['image']='pyimage2'
+    btn3['image']='pyimage2'
+    btn4['image']='pyimage2'
+    btn5['image']='pyimage2'
+    btn6['image']='pyimage2'
+    btn7['image']='pyimage2'
+    btn8['image']='pyimage2'
+    btn9['image']='pyimage2'
 
- random.shuffle(imageList)  #saujauc nejaušā secībā
-
-    
- count = 0
- answer=[]
- answer_dict = {}
- answernumb = 0
- return 0
+    random.shuffle(imageList)  #saujauc nejaušā secībā
+    count = 0
+    answer=[]
+    answer_dict = {}
+    answernumb = 0
+    return 0
 
 def infoLogs():
     jaunsLogs=Toplevel()
