@@ -5,31 +5,31 @@ import random
 from tkinter import messagebox
 
 
-# Izveido logu
+#Izveido logu
 gameWindow = Tk()
 gameWindow.title("Attēli")
-count = 0  # Atvērtās rūtiņas
-correctAnswers = 0  # Pareizās atbildes
+count = 0  #Atvērtās rūtiņas
+correctAnswers = 0  #Pareizās atbildes
 answer = []
-answer_dict = {}  # Salīdzina attēlus
+answer_dict = {}  #Salīdzina attēlus
 answernumb = 0
 
-#galvenā funkcija
+#Galvenā funkcija
 def btnClick (btn,number):
-    #globālie mainīgie
-    global count#skaita, cik rūtiņas atvērtas
-    global correctAnswers# Skaitīs pareizās atbildes
-    global answer#tukšs saraksts ar atbildēm
-    global answer_dict# Kas ir piespiests, salīdzinās ar attēliem no saraksta
+    #Globālie mainīgie
+    global count #Skaita, cik rūtiņas atvērtas
+    global correctAnswers #Skaita pareizās atbildes
+    global answer #Tukšs saraksts ar atbildēm
+    global answer_dict #Kas ir piespiests, salīdzinās ar attēliem no saraksta
     global answernumb
 
     if btn['image']=='pyimage2' and count <2:
         btn['image']=imageList[number]
-        count+=1 #viena rutina atklata
-        answer.append(number) #pievieno pie atbildem
+        count+=1 #Viena rutina atklata
+        answer.append(number) #Pievieno pie atbildem
         answer_dict[btn]=imageList[number]
-    if len(answer)==2: #ja atvertas divas kartites
-        if imageList[answer[0]]==imageList[answer[1]]: #salidzina attelus, kas saglabats
+    if len(answer)==2: #Ja atvertas divas kartites
+        if imageList[answer[0]]==imageList[answer[1]]: #Salīdzina attēlus, kuri saglabāti
             for key in answer_dict:
                 key['state']=DISABLED
             correctAnswers+=2
@@ -38,7 +38,7 @@ def btnClick (btn,number):
                 correctAnswers=0
             answernumb+=1
         else:
-            Tk.update(btn) #messagebox update, tapec vajag piespiest programmu updatetot
+            Tk.update(btn) #Messagebox update, tapec vajag piespiest programmu updatetot
             time.sleep(0.5)
             messagebox.showinfo('Vienādi attēli', 'Neuzminēji')
             for key in answer_dict:
@@ -50,10 +50,10 @@ def btnClick (btn,number):
 
             messagebox.showinfo('Vienādi attēli', 'Malacis! Tu uzvarēji!')
             MsgBox = messagebox.askquestion('Jauna spele','Vai vēlatues sākt jaunu spēli?', icon = 'question')
-            #izveidoju jautājumu spēles beigās
-            if MsgBox == 'yes': #ja jā, tad reset
+            #Izveido jautājumu spēles beigās
+            if MsgBox == 'yes': #Ja jā, tad reset
                 reset()
-            else: #citādi iziet
+            else: #Citādi iziet
                 quit()
         return 0
 
@@ -89,7 +89,7 @@ def reset():
     btn8['image']='pyimage2'
     btn9['image']='pyimage2'
 
-    random.shuffle(imageList)  #saujauc nejaušā secībā
+    random.shuffle(imageList) #Saujauc nejaušā secībā
     count = 0
     answer=[]
     answer_dict = {}
@@ -119,10 +119,10 @@ def infoLogs():
     return 0
 
 
-backgroundImg=ImageTk.PhotoImage(Image.open('UNOback.png')) #fona attels
+backgroundImg=ImageTk.PhotoImage(Image.open('UNOback.png')) #Fona attēls
 bgImg = ImageTk.PhotoImage(Image.open("UNOback.png").resize((200, 300), Image.Resampling.LANCZOS))
 
-# Definē pogas
+#Definē pogas
 btn0 = Button(gameWindow, width=200, height=300, image=bgImg, command=lambda: btnClick(btn0,0))
 btn1 = Button(gameWindow, width=200, height=300, image=bgImg, command=lambda: btnClick(btn1,1))
 btn2 = Button(gameWindow, width=200, height=300, image=bgImg, command=lambda: btnClick(btn2,2))
@@ -134,7 +134,7 @@ btn7 = Button(gameWindow, width=200, height=300, image=bgImg, command=lambda: bt
 btn8 = Button(gameWindow, width=200, height=300, image=bgImg, command=lambda: btnClick(btn8,8))
 btn9 = Button(gameWindow, width=200, height=300, image=bgImg, command=lambda: btnClick(btn9,9))
 
-# Attēli
+#Attēli
 myImg1=ImageTk.PhotoImage(Image.open('UNOdaudz.jpg').resize((200, 300), Image.Resampling.LANCZOS))
 myImg2=ImageTk.PhotoImage(Image.open('UNOzaļš.png').resize((200, 300), Image.Resampling.LANCZOS))
 myImg3=ImageTk.PhotoImage(Image.open('UNOsarkans.png').resize((200, 300), Image.Resampling.LANCZOS))
@@ -142,25 +142,25 @@ myImg4=ImageTk.PhotoImage(Image.open('UNOdzeltens.png').resize((200, 300), Image
 myImg5=ImageTk.PhotoImage(Image.open('UNOzils.png').resize((200, 300), Image.Resampling.LANCZOS))
 
 
-#liela izvelne
-galvenaizvelne=Menu(gameWindow) #izveido galveno izvelni
-gameWindow.config(menu=galvenaizvelne) #pievieno galvenajam logam
+#Lielā izvelne
+galvenaizvelne=Menu(gameWindow) #Izveido galveno izvelni
+gameWindow.config(menu=galvenaizvelne) #Pievieno galvenajam logam
 
-#Maza izvelne
-opcijas=Menu(galvenaizvelne,tearoff=False) #maza izvelne
-galvenaizvelne.add_cascade(label='Opcijas',menu=opcijas) #lejupkritosais saraksts
+#Mazā izvelne
+opcijas=Menu(galvenaizvelne,tearoff=False)
+galvenaizvelne.add_cascade(label='Opcijas',menu=opcijas) #Lejupkritosais saraksts
 
-#komandas
+#Komandas
 opcijas.add_command(label="Jauna spēle",command=reset)
 opcijas.add_command(label="Iziet",command=gameWindow.quit)
 
-galvenaizvelne.add_command(label='Spēles noteikumi',command=infoLogs) #pievieno mazajai izvelnei
+galvenaizvelne.add_command(label='Spēles noteikumi',command=infoLogs) #Pievieno mazajai izvelnei
 
-#attēlu salikšana nejaušā secībā
+#Attēlu salikšana nejaušā secībā
 imageList = [myImg1, myImg1, myImg2, myImg2, myImg3, myImg3, myImg4, myImg4, myImg5, myImg5]
 random.shuffle(imageList)
 
-# Pogu atrašanās vietas
+#Pogu atrašanās vietas
 btn0.grid(row=0, column=0)
 btn1.grid(row=0, column=1)
 btn2.grid(row=0, column=2)
